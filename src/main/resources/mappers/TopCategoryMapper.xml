@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dreaming.dao.TopCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.dreaming.pojo.TopCategory" >
+    <constructor >
+      <idArg column="top_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="top_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    top_id, top_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from top_category
+    where top_id = #{topId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from top_category
+    where top_id = #{topId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dreaming.pojo.TopCategory" >
+    insert into top_category (top_id, top_name)
+    values (#{topId,jdbcType=INTEGER}, #{topName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dreaming.pojo.TopCategory" >
+    insert into top_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="topId != null" >
+        top_id,
+      </if>
+      <if test="topName != null" >
+        top_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="topId != null" >
+        #{topId,jdbcType=INTEGER},
+      </if>
+      <if test="topName != null" >
+        #{topName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreaming.pojo.TopCategory" >
+    update top_category
+    <set >
+      <if test="topName != null" >
+        top_name = #{topName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where top_id = #{topId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreaming.pojo.TopCategory" >
+    update top_category
+    set top_name = #{topName,jdbcType=VARCHAR}
+    where top_id = #{topId,jdbcType=INTEGER}
+  </update>
+</mapper>

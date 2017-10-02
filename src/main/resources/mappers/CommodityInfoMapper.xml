@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dreaming.dao.CommodityInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.dreaming.pojo.CommodityInfo" >
+    <constructor >
+      <idArg column="detailed_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="edition" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="reservation_date" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="offering_date" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="series" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="producer" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="role_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="size" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="proportion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="explain" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    detailed_id, edition, reservation_date, offering_date, series, type, producer, role_name, 
+    size, proportion, explain
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from commodity_info
+    where detailed_id = #{detailedId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from commodity_info
+    where detailed_id = #{detailedId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dreaming.pojo.CommodityInfo" >
+    insert into commodity_info (detailed_id, edition, reservation_date, 
+      offering_date, series, type, 
+      producer, role_name, size, 
+      proportion, explain)
+    values (#{detailedId,jdbcType=INTEGER}, #{edition,jdbcType=VARCHAR}, #{reservationDate,jdbcType=DATE}, 
+      #{offeringDate,jdbcType=DATE}, #{series,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{producer,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
+      #{proportion,jdbcType=VARCHAR}, #{explain,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dreaming.pojo.CommodityInfo" >
+    insert into commodity_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="detailedId != null" >
+        detailed_id,
+      </if>
+      <if test="edition != null" >
+        edition,
+      </if>
+      <if test="reservationDate != null" >
+        reservation_date,
+      </if>
+      <if test="offeringDate != null" >
+        offering_date,
+      </if>
+      <if test="series != null" >
+        series,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="producer != null" >
+        producer,
+      </if>
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="proportion != null" >
+        proportion,
+      </if>
+      <if test="explain != null" >
+        explain,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="detailedId != null" >
+        #{detailedId,jdbcType=INTEGER},
+      </if>
+      <if test="edition != null" >
+        #{edition,jdbcType=VARCHAR},
+      </if>
+      <if test="reservationDate != null" >
+        #{reservationDate,jdbcType=DATE},
+      </if>
+      <if test="offeringDate != null" >
+        #{offeringDate,jdbcType=DATE},
+      </if>
+      <if test="series != null" >
+        #{series,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="producer != null" >
+        #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="proportion != null" >
+        #{proportion,jdbcType=VARCHAR},
+      </if>
+      <if test="explain != null" >
+        #{explain,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreaming.pojo.CommodityInfo" >
+    update commodity_info
+    <set >
+      <if test="edition != null" >
+        edition = #{edition,jdbcType=VARCHAR},
+      </if>
+      <if test="reservationDate != null" >
+        reservation_date = #{reservationDate,jdbcType=DATE},
+      </if>
+      <if test="offeringDate != null" >
+        offering_date = #{offeringDate,jdbcType=DATE},
+      </if>
+      <if test="series != null" >
+        series = #{series,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="producer != null" >
+        producer = #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="proportion != null" >
+        proportion = #{proportion,jdbcType=VARCHAR},
+      </if>
+      <if test="explain != null" >
+        explain = #{explain,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where detailed_id = #{detailedId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreaming.pojo.CommodityInfo" >
+    update commodity_info
+    set edition = #{edition,jdbcType=VARCHAR},
+      reservation_date = #{reservationDate,jdbcType=DATE},
+      offering_date = #{offeringDate,jdbcType=DATE},
+      series = #{series,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      producer = #{producer,jdbcType=VARCHAR},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      proportion = #{proportion,jdbcType=VARCHAR},
+      explain = #{explain,jdbcType=VARCHAR}
+    where detailed_id = #{detailedId,jdbcType=INTEGER}
+  </update>
+</mapper>

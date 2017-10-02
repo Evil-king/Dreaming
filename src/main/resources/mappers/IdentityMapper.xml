@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dreaming.dao.IdentityMapper" >
+  <resultMap id="BaseResultMap" type="com.dreaming.pojo.Identity" >
+    <constructor >
+      <idArg column="identity_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="id_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="id_photo" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    identity_id, full_name, id_number, id_photo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from identity
+    where identity_id = #{identityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from identity
+    where identity_id = #{identityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dreaming.pojo.Identity" >
+    insert into identity (identity_id, full_name, id_number, 
+      id_photo)
+    values (#{identityId,jdbcType=INTEGER}, #{fullName,jdbcType=VARCHAR}, #{idNumber,jdbcType=VARCHAR}, 
+      #{idPhoto,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dreaming.pojo.Identity" >
+    insert into identity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="identityId != null" >
+        identity_id,
+      </if>
+      <if test="fullName != null" >
+        full_name,
+      </if>
+      <if test="idNumber != null" >
+        id_number,
+      </if>
+      <if test="idPhoto != null" >
+        id_photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="identityId != null" >
+        #{identityId,jdbcType=INTEGER},
+      </if>
+      <if test="fullName != null" >
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null" >
+        #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="idPhoto != null" >
+        #{idPhoto,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreaming.pojo.Identity" >
+    update identity
+    <set >
+      <if test="fullName != null" >
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null" >
+        id_number = #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="idPhoto != null" >
+        id_photo = #{idPhoto,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where identity_id = #{identityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreaming.pojo.Identity" >
+    update identity
+    set full_name = #{fullName,jdbcType=VARCHAR},
+      id_number = #{idNumber,jdbcType=VARCHAR},
+      id_photo = #{idPhoto,jdbcType=VARCHAR}
+    where identity_id = #{identityId,jdbcType=INTEGER}
+  </update>
+</mapper>

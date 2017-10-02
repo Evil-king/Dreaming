@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dreaming.dao.CommodityMapper" >
+  <resultMap id="BaseResultMap" type="com.dreaming.pojo.Commodity" >
+    <constructor >
+      <idArg column="commodity_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="commodity_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="commodity_photo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="detailed_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    commodity_id, commodity_name, commodity_photo, update_time, price, detailed_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where commodity_id = #{commodityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from commodity
+    where commodity_id = #{commodityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dreaming.pojo.Commodity" >
+    insert into commodity (commodity_id, commodity_name, commodity_photo, 
+      update_time, price, detailed_id
+      )
+    values (#{commodityId,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, #{commodityPhoto,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{price,jdbcType=DECIMAL}, #{detailedId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dreaming.pojo.Commodity" >
+    insert into commodity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="commodityPhoto != null" >
+        commodity_photo,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="detailedId != null" >
+        detailed_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPhoto != null" >
+        #{commodityPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="detailedId != null" >
+        #{detailedId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreaming.pojo.Commodity" >
+    update commodity
+    <set >
+      <if test="commodityName != null" >
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPhoto != null" >
+        commodity_photo = #{commodityPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="detailedId != null" >
+        detailed_id = #{detailedId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where commodity_id = #{commodityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreaming.pojo.Commodity" >
+    update commodity
+    set commodity_name = #{commodityName,jdbcType=VARCHAR},
+      commodity_photo = #{commodityPhoto,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=DECIMAL},
+      detailed_id = #{detailedId,jdbcType=INTEGER}
+    where commodity_id = #{commodityId,jdbcType=INTEGER}
+  </update>
+</mapper>
